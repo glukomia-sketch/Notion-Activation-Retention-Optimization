@@ -56,7 +56,7 @@ fig = px.funnel(
     funnel_df,
     x="Users",
     y="Stage",
-    title="Signup → Activation → Paid",
+    title="Signup → Collaboration → Paid",
 )
 
 st.plotly_chart(fig, use_container_width=True)

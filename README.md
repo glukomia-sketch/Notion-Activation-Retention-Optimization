@@ -144,16 +144,27 @@ Product opportunities are prioritized using:
 
 ---
 
-## Dashboard
+## Product Analytics Dashboard
 
-The project includes an interactive Streamlit dashboard covering:
+The Streamlit dashboard translates product analytics into actionable PM insights across activation, retention and experimentation.
 
-- **Executive Summary** — activation, retention, churn and revenue trends
-- **Funnel Analysis** — user conversion and activation drop-offs
-- **Cohort Retention** — retention by signup cohort
-- **Experimentation** — control vs. treatment analysis and experiment metrics
+### Activation Funnel
 
----
+![Activation Funnel](docs/screenshots/funnel.png)
+
+The funnel identifies the largest activation drop-off between **Content Creation → Collaboration**, highlighting an opportunity to improve onboarding guidance, workflow discovery and team collaboration.
+
+### Cohort Retention
+
+![Cohort Retention](docs/screenshots/cohorts.png)
+
+Cohort analysis evaluates how user engagement changes over time and helps identify retention patterns across acquisition cohorts.
+
+### Experimentation
+
+![Experimentation](docs/screenshots/experimentation.png)
+
+The experimentation dashboard evaluates a simulated onboarding improvement using activation lift and statistical significance. Results are based on **synthetic portfolio data** and are not actual Notion metrics.
 
 ## Tech Stack
 

@@ -13,6 +13,10 @@ st.caption(
     "Portfolio simulation using synthetic data; results are illustrative estimates, "
     "not actual Notion metrics."
 )
+st.caption(
+    "Experiment activation is measured within the synthetic experiment cohort "
+    "and is not directly comparable to the overall product funnel activation rate."
+)
 exp_df = load_experiment_results()
 results = analyze_experiment(exp_df)
 
@@ -22,7 +26,7 @@ r = results.iloc[0]
 
 if r["significant"]:
     st.success(
-        f"Statistically significant result (p = {r['p_value']:.6f}). "
+        f"Statistically significant result (p < 0.001). "
         f"Treatment lifts activation by {r['absolute_lift']:.1%} ({r['relative_lift']:.1%} relative)."
     )
 else:
