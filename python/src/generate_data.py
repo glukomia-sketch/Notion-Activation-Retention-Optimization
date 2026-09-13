@@ -147,7 +147,7 @@ def _generate_subscriptions(users: pd.DataFrame, reached: dict[str, set[str]]) -
 
     Only users who reached first_project can convert to paid.
     """
-    project_users = reached["first_project"]
+  project_users = reached["collaboration"]
     records: list[dict] = []
 
     for _, user in users.iterrows():
