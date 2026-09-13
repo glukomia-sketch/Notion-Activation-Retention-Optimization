@@ -1,142 +1,213 @@
-# SaaS Growth Intelligence Platform
+# Notion Activation & Retention Optimization
 
-**Activation, Retention, Churn, and Experimentation Analytics**
+## Product Management Case Study
 
-An end-to-end analytics project that models 1.4M+ product events for a B2B SaaS company, defines core growth KPIs, runs a statistically rigorous A/B test, and delivers an interactive Streamlit dashboard — all in SQL and Python.
+A product analytics and strategy case study focused on identifying onboarding friction, improving user activation, and increasing recurring engagement through data-driven product decisions.
+
+> **Note:** This project uses a synthetic dataset for portfolio and product-management analysis purposes. NotionStart and SmartTemplate are proposed product concepts, not existing Notion features.
 
 ---
 
-## Business Problem
+##  Product Objective
 
-A B2B SaaS company has strong signups but weak paid conversion. Leadership needs answers to five questions:
+**Identify onboarding and engagement gaps to improve user activation and retention.**
 
-1. Which users activate?
-2. Which onboarding steps cause the biggest drop-off?
-3. Which features predict paid conversion?
-4. Did the new onboarding experiment improve activation?
-5. Which accounts are at risk of churning?
+---
 
-## Key Findings
+##  Problem Statement
 
-| Finding | Detail |
-| --- | --- |
-| Funnel bottleneck | 33% drop-off between invite sent and first project |
-| Overall conversion | 15.7% of signups reach paid |
-| Experiment lift | New onboarding flow lifts activation by **3.2%** (p < 0.001) |
-| Churn risk | Logistic regression identifies at-risk accounts by recency and engagement depth |
-| Best channel | Referral converts at the highest rate |
+New users may sign up but fail to reach meaningful product value because of friction during onboarding and early product usage.
+
+This project analyzes the user journey from **signup → onboarding → workspace creation → content creation → collaboration** to identify the largest activation drop-offs and prioritize product opportunities.
+
+---
+
+##  Product Analytics
+
+The analysis evaluates:
+
+* User activation funnel
+* Onboarding drop-offs
+* Acquisition-channel performance
+* Cohort retention
+* Experiment performance
+* Product engagement metrics
+
+### Activation Journey
+
+**Signup → Onboarding Started → Workspace Created → Content Created → Collaboration → Paid**
+
+The project defines **Collaboration** as the activation milestone because it represents meaningful product usage beyond initial setup.
+
+---
+
+##  Product Solutions
+
+### 1. NotionStart
+
+A personalized onboarding experience that recommends a relevant starting workflow based on the user's goals and use case.
+
+**Expected impact:**
+
+* Reduce onboarding friction
+* Improve time-to-value
+* Increase workspace creation
+* Increase activation rate
+
+### 2. SmartTemplate
+
+A personalized template recommendation system that helps users quickly create relevant workflows after setting up their workspace.
+
+**Expected impact:**
+
+* Increase content creation
+* Improve feature adoption
+* Increase recurring engagement
+* Improve retention
+
+---
+
+##  RICE Prioritization
+
+Product opportunities are prioritized using:
+
+**RICE = Reach × Impact × Confidence ÷ Effort**
+
+| Initiative               | Reach | Impact | Confidence | Effort | RICE Score |
+| ------------------------ | ----: | -----: | ---------: | -----: | ---------: |
+| NotionStart              |     9 |    3.0 |        0.9 |      3 |    **8.1** |
+| SmartTemplate            |     8 |    2.5 |       0.85 |      4 |   **4.25** |
+| Guided Collaboration     |     6 |    2.5 |        0.8 |      5 |    **2.4** |
+| Advanced Personalization |     5 |    2.0 |        0.7 |      6 |   **1.17** |
+
+**Prioritization decision:** NotionStart is prioritized first because it combines high reach, strong expected activation impact, high confidence, and moderate effort.
+
+> RICE scores are relative portfolio estimates and are not observed product results.
+
+---
+
+##  Experimentation Roadmap
+
+### Experiment 1 — NotionStart
+
+**Hypothesis:** Personalized onboarding will increase the percentage of new users reaching activation.
+
+**Control:** Existing onboarding
+**Treatment:** NotionStart personalized onboarding
+
+**Primary KPI:** Activation Rate
+
+**Secondary KPIs:**
+
+* Workspace creation rate
+* Content creation rate
+* Time-to-value
+* D7 retention
+
+### Experiment 2 — SmartTemplate
+
+**Hypothesis:** Personalized templates will increase meaningful product usage after workspace creation.
+
+**Control:** Generic template recommendations
+**Treatment:** SmartTemplate recommendations
+
+**Primary KPI:** Content Creation Rate
+
+**Secondary KPIs:**
+
+* Template adoption
+* Feature adoption
+* DAU/MAU
+* D7/D30 retention
+
+---
+
+##  Success Metrics
+
+| Metric           | Product Goal                                           |
+| ---------------- | ------------------------------------------------------ |
+| Activation Rate  | Increase users reaching meaningful collaboration       |
+| Time-to-Value    | Reduce time required to reach first meaningful outcome |
+| Feature Adoption | Increase adoption of recommended workflows             |
+| D7/D30 Retention | Improve recurring product usage                        |
+| DAU/MAU          | Increase engagement frequency                          |
+
+---
 
 ## Tech Stack
 
-| Layer | Tool |
-| --- | --- |
-| Data generation | Python (NumPy, Faker) |
-| SQL modeling | DuckDB (staging views + analytical marts) |
-| Analysis | pandas, statsmodels, scikit-learn |
-| Dashboard | Streamlit + Plotly |
-| Documentation | Sphinx (reStructuredText) |
-| Environment | pyenv + hatchling |
+* **Python** — Product analytics and data processing
+* **SQL** — Funnel, retention and experiment analysis
+* **Streamlit** — Interactive product analytics dashboard
+* **Plotly** — Product analytics visualizations
+* **Pandas** — Data manipulation
+* **Git/GitHub** — Version control
 
-## Architecture
+---
 
-```
-Synthetic Data (Parquet)
-    ↓  generate_data.py
-DuckDB SQL Staging Views
-    ↓  stg_*.sql
-DuckDB SQL Mart Tables
-    ↓  mart_*.sql → Parquet exports
-Python Analysis
-    ↓  analysis.py (funnel, cohort, A/B test, churn)
-Streamlit Dashboard
-    └  4 interactive pages
-```
+##  Project Structure
 
-## Quick Start
-
-**Prerequisites:** [pyenv](https://github.com/pyenv/pyenv) with pyenv-virtualenv.
-
-```bash
-# 1. Create the virtual environment
-pyenv install -s 3.13.3
-pyenv virtualenv 3.13.3 saas_env
-pyenv local saas_env
-
-# 2. Install all dependencies
-make all-env
-
-# 3. Run the full pipeline (generate data → SQL transforms → analysis)
-make pipeline
-
-# 4. Launch the dashboard
-make app
-```
-
-The dashboard opens at [http://localhost:8501](http://localhost:8501).
-
-Run `make help` to see all available targets.
-
-## Dashboard Pages
-
-| Page | What it shows |
-| --- | --- |
-| Executive Summary | KPI cards (activation, conversion, retention, churn, MRR), 30-day trends, churn risk breakdown |
-| Funnel Analysis | Step-by-step conversion funnel with channel filter and drop-off rates |
-| Cohort Retention | Weekly retention heatmap colored by rate, with cohort size annotations |
-| Experimentation | Control vs treatment comparison, confidence intervals, p-value, significance banner |
-
-## Project Structure
-
-```
-saas-growth-analytics/
-├── Makefile                    # pyenv-aware build targets
-├── pyproject.toml              # dependencies + tool config
-├── .python-version             # locks pyenv virtualenv
-│
+```text
 ├── data/
-│   ├── raw/                    # generated Parquet files (gitignored)
-│   ├── processed/              # mart Parquet exports (gitignored)
-│   └── sample/                 # small CSV samples for inspection
-│
-├── sql/
-│   ├── staging/                # DuckDB staging views (clean + cast)
-│   └── marts/                  # analytical mart tables
-│
+│   └── sample/
+├── docs/
+│   ├── business_problem.rst
+│   ├── executive_summary.rst
+│   ├── metric_dictionary.rst
+│   └── product_strategy.md
 ├── python/
 │   └── src/
-│       ├── generate_data.py    # synthetic data generator
-│       ├── run_sql_models.py   # DuckDB SQL runner
-│       ├── analysis.py         # funnel, cohort, A/B test, churn
-│       └── metrics.py          # KPI helpers
-│
-├── streamlit_app/
-│   ├── app.py                  # entry point
-│   ├── pages/                  # multi-page dashboard
-│   └── utils/                  # cached data loaders
-│
-└── docs/                       # Sphinx documentation (.rst)
+│       ├── analysis.py
+│       ├── generate_data.py
+│       ├── metrics.py
+│       └── run_sql_models.py
+├── sql/
+│   ├── marts/
+│   │   ├── mart_cohort_retention.sql
+│   │   ├── mart_experiment_results.sql
+│   │   ├── mart_funnel.sql
+│   │   └── mart_product_growth_daily.sql
+│   └── staging/
+└── streamlit_app/
+    └── pages/
+        ├── 01_executive_summary.py
+        ├── 02_funnel.py
+        ├── 03_cohorts.py
+        └── 04_experimentation.py
 ```
 
-## Core KPIs
+---
 
-| KPI | Definition |
-| --- | --- |
-| Signup-to-activation rate | Users who complete workspace creation within 7 days |
-| Trial-to-paid conversion | Trial users who become paying customers |
-| D1 / D7 / D30 retention | Users active 1, 7, or 30 days after signup |
-| Churn rate | Paying users who cancel in a period |
-| MRR | Monthly recurring revenue from active subscriptions |
-| Experiment lift | Activation rate difference between control and treatment |
+##  Product Decision Framework
 
-## Documentation
+**User Journey Analysis**
+↓
+**Identify Activation Drop-off**
+↓
+**Define User Problem**
+↓
+**Generate Product Solutions**
+↓
+**Prioritize Using RICE**
+↓
+**Design Experiments**
+↓
+**Measure KPI Impact**
+↓
+**Iterate**
 
-Full project documentation is built with Sphinx:
+---
 
-```bash
-make docs        # live-reload server on port 8000
-make docs-build  # one-shot HTML build to docs/_build/html
-```
+## Key PM Skills Demonstrated
 
-## License
-
-MIT
+* User Journey Analysis
+* Funnel Analysis
+* Product Analytics
+* Problem Prioritization
+* RICE Framework
+* Product Strategy
+* Experiment Design
+* KPI Definition
+* Activation & Retention Analysis
+* User-Centric Product Thinking
+* Data-Driven Decision Making
