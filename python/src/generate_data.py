@@ -38,17 +38,19 @@ DEVICES = ["desktop", "mobile", "tablet"]
 
 FUNNEL_STEPS = [
     "signup",
+    "onboarding_started",
     "workspace_created",
-    "invite_sent",
-    "first_project",
+    "content_created",
+    "collaboration",
 ]
 
 # Step-to-step conversion probability
 STEP_CONVERSION = {
     "signup": 1.0,
-    "workspace_created": 0.72,
-    "invite_sent": 0.67,
-    "first_project": 0.69,
+    "onboarding_started": 0.87,
+    "workspace_created": 0.82,
+    "content_created": 0.71,
+    "collaboration": 0.59,
 }
 
 MRR_BY_PLAN = {"free": 0, "trial": 0, "pro": 29, "enterprise": 199}
@@ -121,7 +123,15 @@ def _simulate_funnel(users: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, set[s
                     "event_id": str(uuid.uuid4()),
                     "user_id": uid,
                     "event_name": rng.choice(
-                        ["feature_used", "page_view", "settings_changed", "export"]
+                        [
+    "page_view",
+    "template_viewed",
+    "template_used",
+    "database_created",
+    "page_edited",
+    "search_used",
+    "integration_connected",
+]
                     ),
                     "event_ts": signup_ts + pd.Timedelta(days=int(offset_days)),
                     "device": rng.choice(DEVICES),
